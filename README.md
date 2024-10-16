@@ -1,78 +1,66 @@
 # README.md
 
-## Timely
+## Assignment
 
-**React Router Navigation Example**
+**React Router Navigation Demonstration**
 
-### Overview
+### Introduction
 
-This project is a React application that utilizes React Router for navigation between different pages, including authentication and admin routes. It demonstrates the use of protected routes for admins and instructors, ensuring that only authorized users can access certain parts of the application.
+This project is a React-based web application that implements navigation using React Router. It includes user authentication and role-based access control, with distinct sections for admins and instructors. The application demonstrates secure routing to protect sensitive areas, allowing only authorized users to access specific routes.
 
-### Features
+### Key Features
 
-- **Home Page**: Landing page of the application.
-- **Login Page**: Authentication page for users to log in.
-- **Admin Routes**: Protected routes for admin users to manage courses and instructors.
-- **Instructor Dashboard**: Protected route for instructors to access their dashboard.
+- **Homepage**: The primary landing page of the app.
+- **Login Page**: Allows users to log in to the application.
+- **Admin Section**: Secured pages for admins to manage instructors and courses.
+- **Instructor Dashboard**: An exclusive area for instructors to manage their activities.
 
+### Application Routes
 
-### Routes
+Here’s a breakdown of the main routes within the application:
 
-Below is a list of the application's routes:
+- `/`: Accessible by everyone, this route displays the homepage.
+- `/auth/login`: Public login page for user authentication.
+- `/admin/courses`: Admin-only section where course management takes place.
+- `/admin/add-courses`: Admin-protected route for adding new courses.
+- `/admin/instructors`: Restricted to admins for managing instructors.
+- `/instructor`: Dedicated dashboard for instructors, only accessible by logged-in instructors.
 
-| Path                          | Component                      | Protection Level      |
-|-------------------------------|--------------------------------|-----------------------|
-| `/`                           | `HomePage`                    | Public                |
-| `/auth/login`                | `LoginPage`                   | Public                |
-| `/admin/courses`             | `Courses`                     | Admin Protected       |
-| `/admin/add-courses`         | `AddCourses`                  | Admin Protected       |
-| `/admin/instructors`         | `Instructors`                 | Admin Protected       |
-| `/instructor`                | `InstructorDashboard`         | Instructor Protected   |
+### API Overview
 
-# API Endpoints
+The application’s API is divided by functionality and includes appropriate middleware to enforce security and role-based access.
 
-This section outlines the API endpoints for the application, categorized by functionality. Each endpoint specifies the HTTP method, route, and associated middleware for authentication where applicable.
+#### Authentication API
 
-## Authentication Endpoints
+- `POST /auth/login`: Authenticates a user and grants access based on their role.
 
-| Method | Route             | Description                    | Middleware       |
-|--------|-------------------|--------------------------------|-------------------|
-| POST   | `/auth/login`     | Log in a user                 | None              |
+#### Admin API
 
-## Admin Endpoints
+- `GET /admin/instructor`: Fetches the list of all instructors. Protected by `adminAuthenticator`.
+- `POST /admin/course`: Adds a new course. Requires `adminAuthenticator`.
+- `GET /admin/course`: Retrieves a list of all courses linked to instructors. Admin access enforced through `adminAuthenticator`.
+- `POST /admin/lecture`: Creates a new lecture. Accessible only by admins using `adminAuthenticator`.
 
-| Method | Route                  | Description                                   | Middleware            |
-|--------|------------------------|-----------------------------------------------|------------------------|
-| GET    | `/admin/instructor`    | Retrieve a list of instructors                | `adminAuthenticator`   |
-| POST   | `/admin/course`        | Add a new course                              | `adminAuthenticator`   |
-| GET    | `/admin/course`        | Get a list of courses associated with instructors | `adminAuthenticator`   |
-| POST   | `/admin/lecture`       | Add a new lecture                             | `adminAuthenticator`   |
+#### Instructor API
 
-## Instructor Endpoints
+- `GET /instructor/getSchedule`: Fetches the schedule for a specific instructor. Restricted by `instructorAuthenticator`.
 
-| Method | Route              | Description                    | Middleware               |
-|--------|--------------------|--------------------------------|---------------------------|
-| GET    | `/instructor/getSchedule` | Retrieve the schedule for the instructor | `instructorAuthenticator` |
+### Important Considerations
 
-### Notes
+- Specific routes require users to have certain roles, enforced through middleware functions.
+- The API handles essential tasks such as authentication, course management, and schedule retrieval.
+- Security measures like authentication and data validation are vital for protecting the API.
 
-- Each route may require specific user roles for access, which is enforced by middleware.
-- The endpoints allow for basic operations like login, course management, and schedule retrieval. 
-- Ensure proper authentication and validation are implemented for a secure API.
+### Login Credentials
 
-### Credentials
-
-- **Admin Login**:  
-  - Username: `admin@gmail.com`  
+- **Admin Access**:
+  - Username: `admin@gmail.com`
   - Password: `Admin@123`
 
-- **User Login**:  
-  - Username: `rahul.sharma@gmail.com`  
+- **Instructor Access**:
+  - Username: `rahul.sharma@gmail.com`
   - Password: `Instructor@Rahul123`
 
+### Database
 
-
-### Database Dump
-
-A database dump is included in the project files. Ensure to import it into your local database to replicate the application data.
-
+The project includes a database dump that can be imported into your local environment to mirror the application's data.

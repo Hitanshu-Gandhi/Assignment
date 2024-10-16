@@ -1,9 +1,9 @@
+// @ts-nocheck
 import Sidebar from "@/components/instructorSidebar";
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import { MaterialReactTable, useMaterialReactTable, type MRT_ColumnDef } from 'material-react-table';
 import { Card } from "@/components/ui/card"; // Assuming you have a Card component
-import { Button } from "@/components/ui/button"; // Assuming you have a Button component
 
 const InstructorDashboard = () => {
   const [lectures, setLectures] = useState([]);

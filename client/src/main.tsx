@@ -4,7 +4,7 @@ import App from './App.tsx'
 import './index.css'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://localhost:5000'
+axios.defaults.baseURL = 'https://assignment-uoyn.onrender.com'
 axios.defaults.headers.common['token'] = localStorage.getItem('token') ;
 
 createRoot(document.getElementById('root')!).render(
